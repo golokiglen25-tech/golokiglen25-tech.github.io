@@ -7,6 +7,22 @@
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 850px; margin: 0 auto; padding: 0; background-color: #f9f9f9; }
         
+        /* NEW: Top Navigation Bar */
+        .top-nav {
+            background-color: #ffffff;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .top-nav .logo { font-weight: bold; color: #004a99; font-size: 1.2em; text-decoration: none; }
+        .top-nav nav a { color: #333; text-decoration: none; margin-left: 15px; font-weight: 500; font-size: 0.9em; }
+        .top-nav nav a:hover { color: #004a99; }
+
         .hero-banner { 
             background: linear-gradient(135deg, #004a99 0%, #002d5f 100%); 
             padding: 60px 20px; 
@@ -33,10 +49,18 @@
         .footer { text-align: center; padding: 50px 20px; color: #777; font-size: 0.9em; border-top: 1px solid #eee; margin-top: 40px; }
         .footer nav { margin-top: 15px; }
         .footer a { color: #004a99; text-decoration: none; margin: 0 15px; font-weight: bold; }
-        .footer a:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
+
+    <header class="top-nav">
+        <a href="index.html" class="logo">TGL Wealth Hub</a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="privacy.html">Privacy</a>
+        </nav>
+    </header>
 
     <div class="hero-banner">
         <h2>About TGL Wealth Hub</h2>
@@ -45,14 +69,14 @@
 
     <div class="content-section">
         <h3>Our Vision</h3>
-        <p>TGL Wealth Hub was founded to empower professionals in the electrical and technical sectors. We believe that deep technical knowledge, such as mastering the <strong>2026 NEC Reorganization</strong>, is the strongest foundation for financial freedom and career longevity.</p>
+        <p>TGL Wealth Hub empowers professionals in the electrical and technical sectors. We believe that mastering technical standards like the <strong>2026 NEC Reorganization</strong> is the foundation for career success.</p>
 
         <div class="mission-box">
             "Our mission is to provide curated clarity in a world of complex data, helping you turn technical compliance into professional wealth."
         </div>
 
         <h3>What We Do</h3>
-        <p>We provide high-utility guides on electrical engineering standards and innovative AI-powered side hustles. Whether you are navigating new US electrical codes or exploring digital product sales, we provide the blueprints for your success.</p>
+        <p>We provide high-utility guides on electrical engineering and AI-powered side hustles. We give you the blueprints to succeed in both technical compliance and digital marketing.</p>
     </div>
 
     <div class="footer">
