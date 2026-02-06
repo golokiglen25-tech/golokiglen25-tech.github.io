@@ -1,81 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TGL Wealth Hub - Home</title>
-    <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; background-color: #f9f9f9; }
-        
-        /* Fixed Header Navigation */
-        .top-nav {
-            background-color: #ffffff;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        .top-nav .logo { font-weight: bold; color: #004a99; font-size: 1.2em; text-decoration: none; }
-        .top-nav nav a { color: #333; text-decoration: none; margin-left: 15px; font-weight: bold; font-size: 0.9em; }
+<header class="top-nav">
+    <a href="index.html" class="logo">TGL Wealth Hub</a>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="privacy.html">Privacy</a>
+    </nav>
+</header>
 
-        .hero-banner { 
-            background: linear-gradient(135deg, #004a99 0%, #002d5f 100%); 
-            color: white; 
-            padding: 60px 20px; 
-            text-align: center; 
-        }
-        .hero-banner h1 { color: #ffffff !important; margin: 0; font-size: 2.5em; text-shadow: 2px 2px 8px rgba(0,0,0,0.5); }
-
-        .content-container { padding: 40px 20px; max-width: 850px; margin: 0 auto; }
-        .card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 30px; }
-        .card img { width: 100%; border-radius: 10px; margin-bottom: 20px; }
-        
-        .btn { display: inline-block; background: #004a99; color: white; padding: 12px 25px; text-decoration: none; border-radius: 50px; font-weight: bold; }
-        
-        .footer { text-align: center; padding: 40px; color: #777; font-size: 0.9em; background: #eee; margin-top: 40px; }
-    </style>
-</head>
-<body>
-
-    <header class="top-nav">
-        <a href="index.html" class="logo">TGL Wealth Hub</a>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="privacy.html">Privacy</a>
-        </nav>
-    </header>
-
-    <div class="hero-banner">
-        <h1>TGL Wealth Hub</h1>
-        <p>Empowering Your Financial Future</p>
+<div class="content-container">
+    <div class="card">
+        <h2>Top 3 AI-Powered Side Hustles</h2>
+        <img src="ai-hustles.png" alt="AI Side Hustles">
+        <p>Learn how to use high-fidelity AI voice generators and niche newsletters to build sustainable income streams.</p>
+        <a href="ai-hustles.html" class="btn">Learn More</a>
     </div>
 
-    <div class="content-container">
-        
-        <div class="card">
-            <h2>Top 3 AI-Powered Side Hustles</h2>
-            <img src="ai-sidehustles.png" alt="AI Side Hustles">
-            <p>Learn how to use high-fidelity AI voice generators and niche newsletters to build sustainable income streams.</p>
-            <a href="index.html" class="btn">Learn More</a>
-        </div>
-
-        <div class="card">
-            <h2>2026 NEC Reorganization</h2>
-            <img src="nec-thumbnail.png" alt="NEC Reorganization">
-            <p>Essential updates for US electricians on Article 120 (Load Calculations) and Article 130.</p>
-            <a href="nec.html" class="btn">Read Article</a>
-        </div>
-
+    <div class="card">
+        <h2>2026 NEC Reorganization</h2>
+        <img src="nec-thumbnail.png" alt="NEC Reorganization">
+        <p>Essential updates for US electricians on Article 120 (Load Calculations) and Article 130.</p>
+        <a href="nec.html" class="btn">Read Article</a>
     </div>
-
-    <footer class="footer">
-        <p>&copy; 2026 TGL Wealth Hub</p>
-    </footer>
-
-</body>
-</html>
+</div>
