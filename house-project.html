@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PNG Build Master | K30,000</title>
+    <style>
+        :root { --primary: #2c3e50; --accent: #e67e22; --bg: #f4f7f6; --white: #ffffff; --danger: #e74c3c; --success: #27ae60; --blue: #3498db; }
+        body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; color: var(--primary); background: var(--bg); margin: 0; padding-bottom: 50px; }
+        header { background: var(--primary); color: var(--white); padding: 2rem 1rem; text-align: center; border-bottom: 5px solid var(--accent); }
+        .container { max-width: 850px; margin: 0 auto; padding: 0 15px; }
+        .card { background: var(--white); padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-top: 2rem; }
+        h2 { color: var(--accent); border-bottom: 2px solid #eee; margin-top: 0; padding-bottom: 10px; }
+        
+        /* Progress Bar */
+        .progress-container { background: #eee; border-radius: 20px; height: 25px; width: 100%; margin: 15px 0; overflow: hidden; }
+        #progressBar { background: var(--success); height: 100%; width: 0%; transition: width 0.5s ease; }
+        .task-list { list-style: none; padding: 0; }
+        .task-item { display: flex; align-items: center; padding: 10px; border-bottom: 1px solid #f0f0f0; }
+        .task-item input { margin-right: 15px; transform: scale(1.3); }
+
+        /* Dashboard Stats */
+        .budget-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
+        .stat-box { background: #f9f9f9; padding: 20px; border-radius: 8px; text-align: center; border: 1px solid #eee; }
+        .stat-val { font-size: 1.8rem; font-weight: bold; display: block; }
+
+        /* Buttons & Inputs */
+        .input-group { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+        input { padding: 12px; border: 1px solid #ddd; border-radius: 6px; flex: 1; font-size: 1rem; }
+        button { padding: 12px 24px; background: var(--accent); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+        .print-btn { background: var(--blue); margin-top: 20px; width: 100%; font-size: 1.1rem; }
+
+        /* Print Logic */
+        @media print {
+            .input-group, button, .delete-btn, .upload-area, #fileInput, .no-print { display: none !important; }
+            body { background: white; }
+            .card { box-shadow: none; border: 1px solid #eee; }
+            header { background: white; color: black; border-bottom: 2px solid black; }
+        }
+
+        .expense-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee; }
+        .delete-btn { color: var(--danger); cursor: pointer; margin-left: 10px; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; margin-top: 20px; }
+        .photo-card { position: relative; border-radius: 8px; overflow: hidden; height: 140px; border: 1px solid #eee; }
+        .photo-card img { width: 100%; height: 100%; object-fit: cover; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>PNG Build Master</h1>
+    <p>Project Report: 3-Bedroom Elevated Home</p>
+</header>
+
+<div class="container">
+
+    <div class="card">
+        <h2>🏗️ Completion Status: <span id="progressPercent">0%</span></h2>
+        <div class="progress-container"><div id="progressBar"></div></div>
+        <ul class="task-list" id="taskList">
+            <li class="task-item"><input type="checkbox" onchange="updateProgress()"> Week 1: Posts & Foundations</li>
+            <li class="task-item"><input type="checkbox" onchange="updateProgress()"> Week 2: Platform & Floor</li>
+            <li class="task-item"><input type="checkbox" onchange="updateProgress()"> Week 3: Wall Frames & Roofing</li>
+            <li class="task-item"><input type="checkbox" onchange="updateProgress()"> Week 4: Stairs & Siding</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>💰 Budget Log</h2>
+        <div class="budget-grid">
+            <div class="stat-box"><h3>Spent</h3><span id="totalSpent" class="stat-val">K0</span></div>
+            <div class="stat-box"><h3>Available</h3><span id="balance" class="stat-val">K30,000</span></div>
+        </div>
+        <div class="input-group">
+            <input type="text" id="itemName" placeholder="Item Name">
+            <input type="number" id="itemCost" placeholder="Cost (K)">
+            <button onclick="addExpense()">Add</button>
+        </div>
+        <div id="expenseList"></div>
+    </div>
+
+    <div class="card no-print">
+        <h2>📸 Photo Gallery</h2>
+        <div class="upload-area" onclick="document.getElementById('fileInput').click()" style="border: 2px dashed var(--accent); padding: 20px; text-align: center; cursor: pointer;">
+            <strong>+ Upload Progress Photo</strong>
+            <input type="file" id="fileInput" accept="image/*" onchange="handleImage(this.files)" style="display:none;">
+        </div>
+        <div id="gallery" class="gallery-grid"></div>
+    </div>
+
+    <button class="print-btn" onclick="window.print()">🖨️ Print Final Report to PDF</button>
+
+</div>
+
+<script>
+    let expenses = JSON.parse(localStorage.getItem('houseExpenses')) || [];
+    let photos = JSON.parse(localStorage.getItem('housePhotos')) || [];
+    let tasks = JSON.parse(localStorage.getItem('houseTasks')) || [false, false, false, false];
+    const budget = 30000;
+
+    function updateProgress() {
+        const checkboxes = document.querySelectorAll('#taskList input');
+        let completed = 0;
+        checkboxes.forEach((cb, i) => { if (cb.checked) completed++; tasks[i] = cb.checked; });
+        const percent = Math.round((completed / checkboxes.length) * 100);
+        document.getElementById('progressBar').style.width = percent + '%';
+        document.getElementById('progressPercent').innerText = percent + '%';
+        localStorage.setItem('houseTasks', JSON.stringify(tasks));
+    }
+
+    function addExpense() {
+        const name = document.getElementById('itemName').value;
+        const cost = parseFloat(document.getElementById('itemCost').value);
+        if (name && cost) { expenses.push({ name, cost }); updateUI(); document.getElementById('itemName').value = ''; document.getElementById('itemCost').value = ''; }
+    }
+
+    function deleteExpense(index) { expenses.splice(index, 1); updateUI(); }
+
+    function updateUI() {
+        const list = document.getElementById('expenseList'); list.innerHTML = '';
+        let total = expenses.reduce((sum, item) => sum + item.cost, 0);
+        expenses.forEach((item, index) => {
+            list.innerHTML += `<div class="expense-item">${item.name} <span>K${item.cost.toLocaleString()} <span class="delete-btn" onclick="deleteExpense(${index})">×</span></span></div>`;
+        });
+        const bal = budget - total;
+        document.getElementById('totalSpent').innerText = `K${total.toLocaleString()}`;
+        document.getElementById('balance').innerText = `K${bal.toLocaleString()}`;
+        document.getElementById('balance').style.color = bal < 0 ? 'var(--danger)' : 'var(--success)';
+        localStorage.setItem('houseExpenses', JSON.stringify(expenses));
+    }
+
+    function handleImage(files) {
+        const reader = new FileReader();
+        reader.onload = (e) => { photos.push(e.target.result); updateGallery(); };
+        reader.readAsDataURL(files[0]);
+    }
+
+    function updateGallery() {
+        const gal = document.getElementById('gallery'); gal.innerHTML = '';
+        photos.forEach((src, index) => {
+            gal.innerHTML += `<div class="photo-card"><img src="${src}"><span class="no-print" style="position:absolute; top:5px; right:5px; background:white; border-radius:50%; width:20px; height:20px; text-align:center; cursor:pointer;" onclick="deletePhoto(${index})">×</span></div>`;
+        });
+        localStorage.setItem('housePhotos', JSON.stringify(photos));
+    }
+
+    function deletePhoto(index) { photos.splice(index, 1); updateGallery(); }
+
+    // Initialize
+    const checkboxes = document.querySelectorAll('#taskList input');
+    checkboxes.forEach((cb, i) => { cb.checked = tasks[i]; });
+    updateProgress(); updateUI(); updateGallery();
+</script>
+
+</body>
+</html>
+
