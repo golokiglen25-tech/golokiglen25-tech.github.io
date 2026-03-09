@@ -1,0 +1,20 @@
+# TGL Wealth Hub - Robots.txt
+# Targeted for Google, Bing, and DuckDuckGo
+
+User-agent: *
+Allow: /
+
+# Specifically index the high-value guides and shop
+Allow: /index.html
+Allow: /shop.html
+Allow: /nec.html
+Allow: /ai-hustles.html
+Allow: /house-project.html
+
+# Prevent bots from indexing any backup or test files (if you have them)
+Disallow: /README.md
+Disallow: /LICENSE
+
+# Tell bots where to find the map of your site
+Sitemap: https://glendigitalpng.github.io/tgl-wealth-hub/sitemap.xml
+
