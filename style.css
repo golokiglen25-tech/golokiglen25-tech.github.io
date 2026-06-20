@@ -1,3 +1,7 @@
+<main class="landing-page">
+    <a href="house-project.html" class="button-card">My Building Project</a>
+    <a href="wiring.html" class="button-card">AS/NZS Wiring Rules</a>
+</main>
 /* Ensure the text is visible */
 .card h2 {
     color: #333; /* Dark gray text */
