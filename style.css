@@ -1,0 +1,21 @@
+.landing-page {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 100px;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 50px;
+    border-radius: 20px;
+    text-align: center;
+    cursor: pointer;
+    border: 2px solid white;
+    transition: 0.3s;
+}
+
+.card:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+}
