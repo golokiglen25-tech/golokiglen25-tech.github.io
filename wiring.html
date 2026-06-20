@@ -12,6 +12,15 @@
         <div id="menuContainer"></div>
         <div id="ruleContent"></div>
     </section>
+    <section id="calculator-section">
+    <h3>Voltage Drop Calculator</h3>
+    <form id="voltDropForm">
+        <label>Route Length (m): </label>
+        <input type="number" id="length">
+        <button type="button" onclick="calculateVoltage()">Calculate</button>
+    </form>
+    <p id="result"></p>
+    </section>
     
     <script src="script.js"></script>
 </body>
