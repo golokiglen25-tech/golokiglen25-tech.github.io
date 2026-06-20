@@ -1,21 +1,15 @@
-.landing-page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-    height: 80vh;
+/* Ensure the text is visible */
+.card h2 {
+    color: #333; /* Dark gray text */
+    margin: 0;
 }
 
+/* Optional: Make the cards look more like buttons */
 .card {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 40px;
-    border-radius: 15px;
+    background: #f4f4f4; /* Light gray button background */
+    padding: 20px 40px;
+    border-radius: 10px;
+    border: 2px solid #ffcc00; /* Your brand gold color */
     text-decoration: none;
-    color: white;
-    border: 2px solid #ffcc00;
-    transition: 0.3s;
-}
-
-.card:hover {
-    background: rgba(255, 255, 255, 0.2);
+    display: inline-block;
 }
