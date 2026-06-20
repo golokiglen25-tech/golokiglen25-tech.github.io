@@ -1,0 +1,16 @@
+{
+  "ASNZS": {
+    "earthing": {
+      "title": "Earthing Systems",
+      "section": "5.1",
+      "text": "The earthing system must provide a low-impedance path to facilitate the operation of protective devices in the event of a fault.",
+      "videoUrl": "https://youtube.com/@tgl-v9l"
+    },
+    "testing": {
+      "title": "Testing Protocols",
+      "section": "8.2",
+      "text": "Mandatory tests include: 1. Earth Continuity, 2. Insulation Resistance, 3. Polarity, 4. Correct Connection, 5. EFLI, 6. RCD Trip Time.",
+      "videoUrl": "https://youtube.com/@tgl-v9l"
+    }
+  }
+}
